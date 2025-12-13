@@ -2,13 +2,12 @@
 <br>
 # Radiology MVP
 
-This project is a minimum viable product (MVP) for a Radiology IT system.
-
-The goal is to simulate a basic radiology workflow:
-- Patients getting registered
-- Doctors ordering imaging studies (X-ray, CT, MRI, etc.)
-- Radiologists viewing images (simulated) and writing reports
-- Reports being stored and accessed
+This project is a MVP for a Radiology IT system.
+ 
+Goal:simulate a basic radiology workflow:-
+- Patients registration.
+- Doctors ordering imaging studies such as X-ray, CT, MRI, etc.
+- Radiologists able to view images and write reports.
+- Reports being stored and accessed.
 <br>
-This repo is meant for learning and experimenting with healthcare workflows, not for production use.
-
+This repo is meant for learning and experimenting with healthcare workflows, not for production.
