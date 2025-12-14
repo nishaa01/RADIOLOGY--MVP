@@ -1,25 +1,47 @@
 <html>
 <head>  
     <title>Patient Registration</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <div>
+        <h2> New Patient Registration</h2>
+    </div>
+   <form>
+        <!--date-->
+        <div class="section">
+            <label>Today's Date</label>
+            <div class="row">
+            <input type ="date"/>
+            
+            
+            </div></div>
+        <!--patient name-->
+        <div class="section">
+            <label>Patient Name</label>
+            <div class="row">
+             <input type="text" placeholder="First Name" />
+             <input type="text" placeholder="Last Name" />
+        </div></div>
+        <!--date of birth-->
+        <div class="section">
+            <label>Patient Date Of Birth</label>
+             <div class="row">
+                 <input type ="date"/>
+            </div></div>
+        <!-- Referring Physician -->
+      <div class="section">
+        <label>Referring Physician's Name</label>
+        <div class="row">
+          <input type="text" placeholder="First Name" />
+          <input type="text" placeholder="Last Name" />
+        </div>
+      </div>
 
-    <h2>Patient Registration Form</h2>
-
-    
-        <label>Patient Name:</label><br />
-        <input type="text" name="patient_name" /><br /><br />
-
-        <label>Gender:</label><br />
-        <input type="text" name="gender" /><br /><br />
-
-        <label>Age:</label><br />
-        <input type="number" name="age" /><br /><br />
-
-        <label>Scan Type:</label><br />
-        <input type="text" name="scan_type" placeholder="X-ray, CT, MRI, Mammo" /><br /><br />
-
-        <button type="submit">Submit</button>
+            <button type="submit">Submit</button>
+    </form>
+</div>
+        
 
 
 </body>
