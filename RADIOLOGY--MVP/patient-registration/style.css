@@ -1,8 +1,48 @@
 body {
-  background: #f4f7fb;
+  background:white;
   padding: 40px ;
+}
+
+.title {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 30px;
 }
 
 .section{
     margin-bottom: 25px;
+}
+
+.row{
+  display: flex;
+  gap: 25px;
+
+}
+input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input::placeholder {
+  color:rgb(146, 146, 146);
+}
+
+button {
+  width: 10%;
+  padding: 10px;
+  border: none;
+  background: rgb(6, 142, 226);
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgb(1, 170, 248);
 }
