@@ -21,7 +21,7 @@ body {
 }
 .form-card h1 {
   font-size: 30px;
-  margin-bottom: 8px;
+  margin: 0 0 20px 0;
 }
 .section{
     margin-bottom: 25px;
