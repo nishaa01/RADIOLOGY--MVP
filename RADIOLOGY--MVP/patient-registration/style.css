@@ -17,8 +17,14 @@ body {
 .form-card {
   width: 450x;
   background: #fff;
-  padding-right: 8px;
+  padding: 30px;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  
+}
+.error {
+  color: red;
+  font-size: 12px;
 }
 .page-title {
   font-size: 32px;
@@ -33,7 +39,7 @@ body {
 
 .row{
   display: flex;
-  gap: 5px;
+  gap: 8px;
 
 }
 input {

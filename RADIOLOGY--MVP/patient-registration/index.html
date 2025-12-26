@@ -1,10 +1,9 @@
-<html>
-<head>  
-    <title>Patient Registration</title>
-    <link rel="stylesheet" href="style.css" />
-
-    <script src="script.js" defer></script>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient Registration</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <section class="form-wrapper">
@@ -23,8 +22,9 @@
         <div class="section">
             <label>Patient Name</label>
             <div class="row">
-             <input type="text" placeholder="First Name" />
-             <input type="text" placeholder="Last Name" />
+             <input type="text" id="patientName" placeholder="First Name" />
+             <input type="text" id="patientName" placeholder="Last Name" />
+            <span class="error" id="nameError"></span>
         </div></div>
 
         
@@ -69,7 +69,7 @@
 </div>
 </div>
   </section>       
-
+<script src="script.js"></script>
 
 </body>
 </html>
