@@ -21,4 +21,5 @@ const nameError = document.getElementById("nameError");
       alert("Patient registered successfully!");
       form.reset();
     }
+    
   });
