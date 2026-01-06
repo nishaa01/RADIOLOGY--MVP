@@ -10,7 +10,25 @@ const nameError = document.getElementById("nameError");
     nameError.textContent = "";
     return true;
   }
-  nameInput.addEventListener("input", validateName);
+
+    function validateDate(inputId, errorId, isDOB = false) {
+    const value = document.getElementById(inputId).value;
+    if (!value) {
+      showError(errorId, "Date is required");
+      return false;
+    }
+
+    if (isDOB && new Date(value) > new Date()) {
+      showError(errorId, "DOB cannot be in the future");
+      return false;
+    }
+
+    clearError(errorId);
+    return true;
+  }
+
+  nameInput.addEventListener("input", validateName)&&
+   validateDate("dob", "dobError", true);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
