@@ -1,21 +1,33 @@
 const form = document.getElementById("patientForm");
 
-const nameInput = document.getElementById("patientName");
+const patientFirstNameInput = document.getElementById("patientFirstName");
+const patientLastNameInput = document.getElementById("patientLastName");
 const dobInput = document.getElementById("dob");
 const pidInput = document.getElementById("patientId");
 
-const nameError = document.getElementById("nameError");
+const patientFirstNameError = document.getElementById("firstnameError");
+const patientLastNameError = document.getElementById("lastnameError");
 const dobError = document.getElementById("dobError");
 const pidError = document.getElementById("pidError");
 
 //////////    NAME VALIDATION   ////////////////////
- function validateName() {
+ function validateFirstName() {
     const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(nameInput.value.trim())) {
-      nameError.textContent = "Name should contain only letters";
+    if (!regex.test(patientFirstNameInput.value.trim())) {
+      patientFirstNameError.textContent = "Name should contain only letters";
       return false;
     }
-    nameError.textContent = "";
+    patientFirstNameError.textContent = "";
+    return true;
+  }
+
+   function validateLastName() {
+    const regex = /^[A-Za-z\s]+$/;
+    if (!regex.test(patientLastNameInput.value.trim())) {
+      patientLastNameError.textContent = "Name should contain only letters";
+      return false;
+    }
+    patientLastNameError.textContent = "";
     return true;
   }
 ///////////     DOB VALIDATION   ////////////////
@@ -55,7 +67,8 @@ function validatePID() {
   return true;
 }
 
-  nameInput.addEventListener("input", validateName);
+  patientFirstNameInput.addEventListener("input", validateFirstName);
+  patientLastNameInput.addEventListener("input", validateLastName);
   dobInput.addEventListener("change", validateDOB);
   pidInput.addEventListener("input", validatePID);
 
@@ -63,7 +76,8 @@ function validatePID() {
     e.preventDefault();
 
   const isValid =
-      validateName()&&
+      validateFirstName()&&
+      validateLastName()&&
       validateDOB()&&
       validatePID();
       
