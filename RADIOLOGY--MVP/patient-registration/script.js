@@ -2,9 +2,11 @@ const form = document.getElementById("patientForm");
 
 const nameInput = document.getElementById("patientName");
 const dobInput = document.getElementById("dob");
+const pidInput = document.getElementById("patientId");
 
 const nameError = document.getElementById("nameError");
 const dobError = document.getElementById("dobError");
+const pidError = document.getElementById("pidError");
 
 //////////    NAME VALIDATION   ////////////////////
  function validateName() {
@@ -34,16 +36,36 @@ const dobError = document.getElementById("dobError");
   return true;
 }
 
+/////////////////     PID VALIDATION      ///////////////////
+function validatePID() {
+  const pidValue = pidInput.value.trim();
+  const pidRegex = /^PID\d{4}$/;
+
+  if (!pidValue) {
+    pidError.textContent = "Patient ID is required";
+    return false;
+  }
+
+  if (!pidRegex.test(pidValue)) {
+    pidError.textContent = "PID must be in format PID1234";
+    return false;
+  }
+
+  pidError.textContent = "";
+  return true;
+}
 
   nameInput.addEventListener("input", validateName);
   dobInput.addEventListener("change", validateDOB);
+  pidInput.addEventListener("input", validatePID);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
   const isValid =
       validateName()&&
-      validateDOB();
+      validateDOB()&&
+      validatePID();
       
       if (isValid) {
       alert("Patient registered successfully!");
