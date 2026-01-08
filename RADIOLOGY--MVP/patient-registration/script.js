@@ -1,6 +1,6 @@
 const form = document.getElementById("patientForm");
 
-const date = document.getElementById("date");
+const dateInput = document.getElementById("date");
 const patientFirstNameInput = document.getElementById("patientFirstName");
 const patientLastNameInput = document.getElementById("patientLastName");
 const dobInput = document.getElementById("dob");
@@ -30,7 +30,6 @@ const pidError = document.getElementById("pidError");
   dateError.textContent = "";
   return true;
 }
-
 
 //////////    NAME VALIDATION   ////////////////////
  function validateFirstName() {
@@ -88,7 +87,7 @@ function validatePID() {
   pidError.textContent = "";
   return true;
 }
-
+  dateInput.addEventListener("change", validateDate);
   patientFirstNameInput.addEventListener("input", validateFirstName);
   patientLastNameInput.addEventListener("input", validateLastName);
   dobInput.addEventListener("change", validateDOB);
@@ -98,6 +97,7 @@ function validatePID() {
     e.preventDefault();
 
   const isValid =
+      validateDate()&&
       validateFirstName()&&
       validateLastName()&&
       validateDOB()&&
