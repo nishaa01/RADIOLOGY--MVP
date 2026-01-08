@@ -1,14 +1,36 @@
 const form = document.getElementById("patientForm");
 
+const date = document.getElementById("date");
 const patientFirstNameInput = document.getElementById("patientFirstName");
 const patientLastNameInput = document.getElementById("patientLastName");
 const dobInput = document.getElementById("dob");
 const pidInput = document.getElementById("patientId");
 
+const dateError = document.getElementById("dateError");
 const patientFirstNameError = document.getElementById("firstnameError");
 const patientLastNameError = document.getElementById("lastnameError");
 const dobError = document.getElementById("dobError");
 const pidError = document.getElementById("pidError");
+
+////////////////  DATE VALIDATION       /////////////////////
+
+ function validateDate() {
+  const dateValue = dateInput.value;
+
+  if (!dateValue) {
+    dateError.textContent = "Date is required";
+    return false;
+  }
+
+  if (new Date(dateValue) > new Date()) {
+    dateError.textContent = "Date cannot be in the future";
+    return false;
+  }
+
+  dateError.textContent = "";
+  return true;
+}
+
 
 //////////    NAME VALIDATION   ////////////////////
  function validateFirstName() {
