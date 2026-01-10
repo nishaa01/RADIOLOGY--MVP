@@ -75,24 +75,7 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
   return true;
 }
 
-/////////////////     PID VALIDATION      ///////////////////
-function validatePID() {
-  const pidValue = pidInput.value.trim();
-  const pidRegex = /^PID\d{4}$/;
 
-  if (!pidValue) {
-    pidError.textContent = "Patient ID is required";
-    return false;
-  }
-
-  if (!pidRegex.test(pidValue)) {
-    pidError.textContent = "PID must be in format PID1234";
-    return false;
-  }
-
-  pidError.textContent = "";
-  return true;
-}
 ///////////// REFFERING PHYSICIAN NAME VALIDATION     //////////////
 
 function validateRefFirstName() {
