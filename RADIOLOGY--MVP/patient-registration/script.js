@@ -10,8 +10,8 @@ const refphysicianLastNameInput = document.getElementById("refPhysicianLastName"
 
 
 const dateError = document.getElementById("dateError");
-const patientFirstNameError = document.getElementById("firstnameError");
-const patientLastNameError = document.getElementById("lastnameError");
+const firstNameError = document.getElementById("firstNameError");
+const lastNameError = document.getElementById("lastNameError");
 const dobError = document.getElementById("dobError");
 const pidError = document.getElementById("pidError");
 const refphysicianFirstNameError = document.getElementById("refPhysicianFirstNameError");
@@ -38,25 +38,32 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
 }
 
 //////////    NAME VALIDATION   ////////////////////
- function validateFirstName() {
-    const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(patientFirstNameInput.value.trim())) {
-      patientFirstNameError.textContent = "Name should contain only letters";
-      return false;
-    }
-    patientFirstNameError.textContent = "";
-    return true;
+ function validateNameLive(input, errorElement) {
+  const value = input.value.trim();
+  const regex = /^[A-Za-z\s]+$/;
+
+
+  if (value === "") {
+    errorElement.textContent = "Name is required";
+    return false;
   }
 
-   function validateLastName() {
-    const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(patientLastNameInput.value.trim())) {
-      patientLastNameError.textContent = "Name should contain only letters";
-      return false;
-    }
-    patientLastNameError.textContent = "";
-    return true;
+
+  if (!regex.test(value)) {
+    errorElement.textContent = "Name should contain only letters";
+    return false;
   }
+
+  
+  if (value.length < 3) {
+    errorElement.textContent = "Name must be at least 3 characters";
+    return false;
+  }
+
+  errorElement.textContent = "";
+  return true;
+}
+
 ///////////     DOB VALIDATION   ////////////////
     function validateDOB() {
   const dobValue = dobInput.value;
@@ -76,49 +83,39 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
 }
 
 
-///////////// REFFERING PHYSICIAN NAME VALIDATION     //////////////
-
-function validateRefFirstName() {
-    const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(refphysicianFirstNameInput.value.trim())) {
-      refphysicianFirstNameError.textContent = "Name should contain only letters";
-      return false;
-    }
-    refphysicianFirstNameError.textContent = "";
-    return true;
-  }
-
-   function validateRefLastName() {
-    const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(refphysicianLastNameInput.value.trim())) {
-      refphysicianLastNameError.textContent = "Name should contain only letters";
-      return false;
-    }
-    refphysicianLastNameError.textContent = "";
-    return true;
-  }
-
-
 
   dateInput.addEventListener("change", validateDate);
-  patientFirstNameInput.addEventListener("input", validateFirstName);
-  patientLastNameInput.addEventListener("input", validateLastName);
   dobInput.addEventListener("change", validateDOB);
-  pidInput.addEventListener("input", validatePID);
-  refphysicianFirstNameInput.addEventListener("input", validateRefFirstName);
-  refphysicianLastNameInput.addEventListener("input", validateRefLastName);
+
+  patientFirstNameInput.addEventListener("input", () =>
+  validateNameLive(patientFirstNameInput, firstNameError)
+);
+
+patientLastNameInput.addEventListener("input", () =>
+  validateNameLive(patientLastNameInput, lastNameError)
+);
+
+refphysicianFirstNameInput.addEventListener("input", () =>
+  validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError)
+);
+
+refphysicianLastNameInput.addEventListener("input", () =>
+  validateNameLive(refphysicianLastNameInput, refphysicianLastNameError)
+);
+
+  
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
   const isValid =
       validateDate()&&
-      validateFirstName()&&
-      validateLastName()&&
-      validateDOB()&&
-      validatePID()&&
-      validateRefFirstName()&&
-      validateRefLastName();
+      validateDOB()
+      validateNameLive(patientFirstNameInput, firstNameError) &&
+    validateNameLive(patientLastNameInput, lastNameError) &&
+    validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError) &&
+    validateNameLive(refphysicianLastNameInput, refphysicianLastNameError);
+     
       
       if (isValid) {
       alert("Patient registered successfully!");
