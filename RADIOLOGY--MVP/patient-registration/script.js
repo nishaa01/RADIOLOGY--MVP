@@ -87,14 +87,14 @@ const phoneError = document.getElementById("phoneError");
 
 //////////////// PHONE NUMBER VALIDATION    ////////////////
  function validatePhone(){
-  const phonevalue = phoneInput.value;
+  const Phonevalue = phoneInput.value;
 
-  if (phonevalue === "") {
+  if (Phonevalue === "") {
     phoneError.textContent = "Phone Number is required";
     return false;
   }
 
- if(phonevalue.length<10){
+ if(Phonevalue.length<10){
   phoneError.textContent = "require 10 digits";
   return false;
  }
