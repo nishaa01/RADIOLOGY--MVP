@@ -7,6 +7,7 @@ const dobInput = document.getElementById("dob");
 const pidInput = document.getElementById("patientId");
 const refphysicianFirstNameInput = document.getElementById("refPhysicianFirstName");
 const refphysicianLastNameInput = document.getElementById("refPhysicianLastName");
+const phoneInput = document.getElementById("phoneNumber");
 
 
 const dateError = document.getElementById("dateError");
@@ -16,6 +17,7 @@ const dobError = document.getElementById("dobError");
 const pidError = document.getElementById("pidError");
 const refphysicianFirstNameError = document.getElementById("refPhysicianFirstNameError");
 const refphysicianLastNameError = document.getElementById("refPhysicianLastNameError");
+const phoneError = document.getElementById("phoneError");
 
 
 ////////////////  DATE VALIDATION       /////////////////////
@@ -23,10 +25,11 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
  function validateDate() {
   const dateValue = dateInput.value;
 
-  if (!dateValue) {
+   if (dateValue === "") {
     dateError.textContent = "Date is required";
     return false;
   }
+
 
   if (new Date(dateValue) > new Date()) {
     dateError.textContent = "Date cannot be in the future";
@@ -68,7 +71,7 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
     function validateDOB() {
   const dobValue = dobInput.value;
 
-  if (!dobValue) {
+   if (dobValue === "") {
     dobError.textContent = "Date of Birth is required";
     return false;
   }
@@ -82,10 +85,26 @@ const refphysicianLastNameError = document.getElementById("refPhysicianLastNameE
   return true;
 }
 
+//////////////// PHONE NUMBER VALIDATION    ////////////////
+ function validatePhone(){
+  const phonevalue = phoneInput.value;
 
+  if (phonevalue === "") {
+    phoneError.textContent = "Phone Number is required";
+    return false;
+  }
+
+ if(phonevalue.length<10){
+  phoneError.textContent = "require 10 digits";
+  return false;
+ }
+ phoneError.textContent = "";
+  return true;
+ }
 
   dateInput.addEventListener("change", validateDate);
   dobInput.addEventListener("change", validateDOB);
+  phoneInput.addEventListener("change",validatePhone);
 
   patientFirstNameInput.addEventListener("input", () =>
   validateNameLive(patientFirstNameInput, firstNameError)
@@ -114,8 +133,8 @@ refphysicianLastNameInput.addEventListener("input", () =>
       validateNameLive(patientFirstNameInput, firstNameError) &&
     validateNameLive(patientLastNameInput, lastNameError) &&
     validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError) &&
-    validateNameLive(refphysicianLastNameInput, refphysicianLastNameError);
-     
+    validateNameLive(refphysicianLastNameInput, refphysicianLastNameError)&&
+    validatePhone(); 
       
       if (isValid) {
       alert("Patient registered successfully!");
