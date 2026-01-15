@@ -102,9 +102,22 @@ const phoneError = document.getElementById("phoneError");
   return true;
  }
 
+//////////////////////      PID VALIDATION    /////////////////////////
+function validatePID(){
+  const pidvalue = pidInput.value;
+
+  if (pidvalue === "") {
+    pidError.textContent = "PID is required";
+    return false;
+  }
+   pidError.textContent="";
+   return true;
+}
+
   dateInput.addEventListener("change", validateDate);
   dobInput.addEventListener("change", validateDOB);
-  phoneInput.addEventListener("change",validatePhone);
+  phoneInput.addEventListener("input",validatePhone);
+  pidInput.addEventListener("input", validatePID);
 
   patientFirstNameInput.addEventListener("input", () =>
   validateNameLive(patientFirstNameInput, firstNameError)
@@ -134,7 +147,8 @@ refphysicianLastNameInput.addEventListener("input", () =>
     validateNameLive(patientLastNameInput, lastNameError) &&
     validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError) &&
     validateNameLive(refphysicianLastNameInput, refphysicianLastNameError)&&
-    validatePhone(); 
+    validatePhone()&&
+    validatePID();
       
       if (isValid) {
       alert("Patient registered successfully!");
