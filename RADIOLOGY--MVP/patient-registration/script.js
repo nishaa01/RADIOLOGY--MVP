@@ -142,7 +142,7 @@ refphysicianLastNameInput.addEventListener("input", () =>
 
   const isValid =
       validateDate()&&
-      validateDOB()
+      validateDOB()&&
       validateNameLive(patientFirstNameInput, firstNameError) &&
     validateNameLive(patientLastNameInput, lastNameError) &&
     validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError) &&
