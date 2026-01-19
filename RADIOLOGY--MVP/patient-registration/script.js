@@ -102,6 +102,17 @@ const phoneError = document.getElementById("phoneError");
   return true;
  }
 
+ //////////////////////      PID VALIDATION    /////////////////////////
+function validatePID(){
+  const pidvalue = pidInput.value;
+
+  if (pidvalue === "") {
+    pidError.textContent = "PID is required";
+    return false;
+  }
+   pidError.textContent="";
+   return true;
+}
 
   dateInput.addEventListener("change", validateDate);
   dobInput.addEventListener("change", validateDOB);
