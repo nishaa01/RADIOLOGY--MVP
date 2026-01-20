@@ -1,13 +1,17 @@
 const form = document.getElementById("patientForm");
 
-const dateInput = document.getElementById("date");
-const patientFirstNameInput = document.getElementById("patientFirstName");
-const patientLastNameInput = document.getElementById("patientLastName");
-const dobInput = document.getElementById("dob");
-const pidInput = document.getElementById("patientId");
-const refphysicianFirstNameInput = document.getElementById("refPhysicianFirstName");
-const refphysicianLastNameInput = document.getElementById("refPhysicianLastName");
-const phoneInput = document.getElementById("phoneNumber");
+const inputs = {
+  date: document.getElementById("date"),
+  dob: document.getElementById("dob"),
+  phone: document.getElementById("phoneNumber"),
+  pid: document.getElementById("patientId"),
+
+  firstName: document.getElementById("patientFirstName"),
+  lastName: document.getElementById("patientLastName"),
+  refFirstName: document.getElementById("refPhysicianFirstName"),
+  refLastName: document.getElementById("refPhysicianLastName"),
+};
+
 
 
 const dateError = document.getElementById("dateError");
