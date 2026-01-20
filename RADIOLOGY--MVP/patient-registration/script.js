@@ -12,40 +12,38 @@ const inputs = {
   refLastName: document.getElementById("refPhysicianLastName"),
 };
 
+const errors = {
+  date: document.getElementById("dateError"),
+  dob: document.getElementById("dobError"),
+  phone: document.getElementById("phoneError"),
+  pid: document.getElementById("pidError"),
 
-
-const dateError = document.getElementById("dateError");
-const firstNameError = document.getElementById("firstNameError");
-const lastNameError = document.getElementById("lastNameError");
-const dobError = document.getElementById("dobError");
-const pidError = document.getElementById("pidError");
-const refphysicianFirstNameError = document.getElementById("refPhysicianFirstNameError");
-const refphysicianLastNameError = document.getElementById("refPhysicianLastNameError");
-const phoneError = document.getElementById("phoneError");
-
+  firstName: document.getElementById("firstNameError"),
+  lastName: document.getElementById("lastNameError"),
+  refFirstName: document.getElementById("refPhysicianFirstNameError"),
+  refLastName: document.getElementById("refPhysicianLastNameError"),
+};
 
 ////////////////  DATE VALIDATION       /////////////////////
 
- function validateDate() {
-  const dateValue = dateInput.value;
-
-   if (dateValue === "") {
-    dateError.textContent = "Date is required";
+ function validateDateField(input, errorElement, label) {
+  if (input.value === "") {
+    errorElement.textContent = `${label} is required`;
     return false;
   }
 
-
-  if (new Date(dateValue) > new Date()) {
-    dateError.textContent = "Date cannot be in the future";
+  if (new Date(input.value) > new Date()) {
+    errorElement.textContent = `${label} cannot be in the future`;
     return false;
   }
 
-  dateError.textContent = "";
+  errorElement.textContent = "";
   return true;
 }
 
+
 //////////    NAME VALIDATION   ////////////////////
- function validateNameLive(input, errorElement) {
+ function validateName(input, errorElement) {
   const value = input.value.trim();
   const regex = /^[A-Za-z\s]+$/;
 
@@ -90,73 +88,81 @@ const phoneError = document.getElementById("phoneError");
 }
 
 //////////////// PHONE NUMBER VALIDATION    ////////////////
- function validatePhone(){
-  const Phonevalue = phoneInput.value;
+function validatePhone() {
+  const value = inputs.phone.value;
 
-  if (Phonevalue === "") {
-    phoneError.textContent = "Phone Number is required";
+  if (value === "") {
+    errors.phone.textContent = "Phone Number is required";
     return false;
   }
 
- if(Phonevalue.length<10){
-  phoneError.textContent = "require 10 digits";
-  return false;
- }
- phoneError.textContent = "";
+  if (value.length !== 10) {
+    errors.phone.textContent = "Phone number must be 10 digits";
+    return false;
+  }
+
+  errors.phone.textContent = "";
   return true;
- }
-
- //////////////////////      PID VALIDATION    /////////////////////////
-function validatePID(){
-  const pidvalue = pidInput.value;
-
-  if (pidvalue === "") {
-    pidError.textContent = "PID is required";
-    return false;
-  }
-   pidError.textContent="";
-   return true;
 }
 
-  dateInput.addEventListener("change", validateDate);
-  dobInput.addEventListener("change", validateDOB);
-  phoneInput.addEventListener("input",validatePhone);
-  pidInput.addEventListener("input", validatePID);
 
-  patientFirstNameInput.addEventListener("input", () =>
-  validateNameLive(patientFirstNameInput, firstNameError)
+ //////////////////////      PID VALIDATION    /////////////////////////
+function validatePID() {
+  if (inputs.pid.value === "") {
+    errors.pid.textContent = "PID is required";
+    return false;
+  }
+
+  errors.pid.textContent = "";
+  return true;
+}
+
+
+
+inputs.date.addEventListener("change", () =>
+  validateDateField(inputs.date, errors.date, "Date")
 );
 
-patientLastNameInput.addEventListener("input", () =>
-  validateNameLive(patientLastNameInput, lastNameError)
+inputs.dob.addEventListener("change", () =>
+  validateDateField(inputs.dob, errors.dob, "Date of Birth")
 );
 
-refphysicianFirstNameInput.addEventListener("input", () =>
-  validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError)
+inputs.phone.addEventListener("input", validatePhone);
+inputs.pid.addEventListener("input", validatePID);
+
+inputs.firstName.addEventListener("input", () =>
+  validateName(inputs.firstName, errors.firstName)
 );
 
-refphysicianLastNameInput.addEventListener("input", () =>
-  validateNameLive(refphysicianLastNameInput, refphysicianLastNameError)
+inputs.lastName.addEventListener("input", () =>
+  validateName(inputs.lastName, errors.lastName)
+);
+
+inputs.refFirstName.addEventListener("input", () =>
+  validateName(inputs.refFirstName, errors.refFirstName)
+);
+
+inputs.refLastName.addEventListener("input", () =>
+  validateName(inputs.refLastName, errors.refLastName)
 );
 
   
 
   form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
   const isValid =
-      validateDate()&&
-      validateDOB()&&
-      validateNameLive(patientFirstNameInput, firstNameError) &&
-    validateNameLive(patientLastNameInput, lastNameError) &&
-    validateNameLive(refphysicianFirstNameInput, refphysicianFirstNameError) &&
-    validateNameLive(refphysicianLastNameInput, refphysicianLastNameError)&&
-    validatePhone()&&
+    validateDateField(inputs.date, errors.date, "Date") &&
+    validateDateField(inputs.dob, errors.dob, "Date of Birth") &&
+    validateName(inputs.firstName, errors.firstName) &&
+    validateName(inputs.lastName, errors.lastName) &&
+    validateName(inputs.refFirstName, errors.refFirstName) &&
+    validateName(inputs.refLastName, errors.refLastName) &&
+    validatePhone() &&
     validatePID();
-      
-      if (isValid) {
-      alert("Patient registered successfully!");
-      form.reset();
-    }
-    
-  });
+
+  if (isValid) {
+    alert("Patient registered successfully!");
+    form.reset();
+  }
+});
