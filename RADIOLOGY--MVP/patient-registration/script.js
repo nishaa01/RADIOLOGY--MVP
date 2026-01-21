@@ -184,7 +184,7 @@ function createPatientObject() {
     if (!isValid) return;
 
   const patientData = createPatientObject();
-  console.log(patientData); // 👈 SEE YOUR OBJECT
+  console.log(patientData); 
 
   alert("Patient registered successfully!");
   form.reset();
