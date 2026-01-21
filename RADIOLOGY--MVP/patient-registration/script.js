@@ -146,7 +146,27 @@ inputs.refLastName.addEventListener("input", () =>
   validateName(inputs.refLastName, errors.refLastName)
 );
 
+/////////             creating objects            //////////////
+function createPatientObject() {
+  return {
+    date: inputs.date.value,
+    pid: inputs.pid.value,
+
+    patient: {
+      firstName: inputs.firstName.value.trim(),
+      lastName: inputs.lastName.value.trim(),
+      dob: inputs.dob.value,
+      phone: inputs.phone.value
+    },
+
+    physician: {
+      firstName: inputs.refFirstName.value.trim(),
+      lastName: inputs.refLastName.value.trim()
+    }
+  };
+}
   
+////////////////////////////////////////////////
 
   form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -161,8 +181,12 @@ inputs.refLastName.addEventListener("input", () =>
     validatePhone() &&
     validatePID();
 
-  if (isValid) {
-    alert("Patient registered successfully!");
-    form.reset();
-  }
+    if (!isValid) return;
+
+  const patientData = createPatientObject();
+  console.log(patientData); // 👈 SEE YOUR OBJECT
+
+  alert("Patient registered successfully!");
+  form.reset();
 });
+  
