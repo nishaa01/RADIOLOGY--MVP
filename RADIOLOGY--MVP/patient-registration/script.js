@@ -27,6 +27,7 @@ const errors = {
 const submitBtn = form.querySelector("button[type='submit']");
 submitBtn.disabled = true;
 
+
 ////////////////  DATE VALIDATION       /////////////////////
 
  function validateDateField(input, errorElement, label) {
@@ -119,9 +120,8 @@ function validatePID() {
   errors.pid.textContent = "";
   return true;
 }
-
-/////////////////////////
-function checkFormValidity() {
+//////////////////////////
+function updateSubmitButtonState() {
   const isFormValid =
     validateDateField(inputs.date, errors.date, "Date") &&
     validateDateField(inputs.dob, errors.dob, "Date of Birth") &&
@@ -134,46 +134,48 @@ function checkFormValidity() {
 
   submitBtn.disabled = !isFormValid;
 }
-inputs.date.addEventListener("change", checkFormValidity);
-inputs.dob.addEventListener("change", checkFormValidity);
-
-inputs.phone.addEventListener("input", checkFormValidity);
-inputs.pid.addEventListener("input", checkFormValidity);
-
-inputs.firstName.addEventListener("input", checkFormValidity);
-inputs.lastName.addEventListener("input", checkFormValidity);
-
-inputs.refFirstName.addEventListener("input", checkFormValidity);
-inputs.refLastName.addEventListener("input", checkFormValidity);
 
 
 
-inputs.date.addEventListener("change", () =>
-  validateDateField(inputs.date, errors.date, "Date")
-);
+inputs.date.addEventListener("change", () =>{
+  validateDateField(inputs.date, errors.date, "Date");
+  updateSubmitButtonState();
+});
 
-inputs.dob.addEventListener("change", () =>
-  validateDateField(inputs.dob, errors.dob, "Date of Birth")
-);
+inputs.dob.addEventListener("change", () =>{
+  validateDateField(inputs.dob, errors.dob, "Date of Birth");
+updateSubmitButtonState();
+});
 
-inputs.phone.addEventListener("input", validatePhone);
-inputs.pid.addEventListener("input", validatePID);
+inputs.phone.addEventListener("input", () => {
+  validatePhone();
+  updateSubmitButtonState();
+});
+inputs.pid.addEventListener("input", () => {
+  validatePID();
+  updateSubmitButtonState();
+});
 
-inputs.firstName.addEventListener("input", () =>
-  validateName(inputs.firstName, errors.firstName)
-);
 
-inputs.lastName.addEventListener("input", () =>
-  validateName(inputs.lastName, errors.lastName)
-);
+inputs.firstName.addEventListener("input", () =>{
+  validateName(inputs.firstName, errors.firstName);
+ updateSubmitButtonState();
+});
 
-inputs.refFirstName.addEventListener("input", () =>
-  validateName(inputs.refFirstName, errors.refFirstName)
-);
+inputs.lastName.addEventListener("input", () =>{
+  validateName(inputs.lastName, errors.lastName);
+   updateSubmitButtonState();
+});
 
-inputs.refLastName.addEventListener("input", () =>
-  validateName(inputs.refLastName, errors.refLastName)
-);
+inputs.refFirstName.addEventListener("input", () =>{
+  validateName(inputs.refFirstName, errors.refFirstName);
+   updateSubmitButtonState();
+});
+
+inputs.refLastName.addEventListener("input", () =>{
+  validateName(inputs.refLastName, errors.refLastName);
+   updateSubmitButtonState();
+});
 
 /////////             creating objects            //////////////
 function createPatientObject() {
@@ -211,14 +213,14 @@ function createPatientObject() {
     validatePID();
 
     if (!isValid) return;
-    
-if (submitBtn.disabled) return;
+    if (submitBtn.disabled) return;
+
 
   const patientData = createPatientObject();
   console.log(patientData); 
 
   alert("Patient registered successfully!");
   form.reset();
-  submitBtn.disabled = true;
+    submitBtn.disabled = true;
 });
   
