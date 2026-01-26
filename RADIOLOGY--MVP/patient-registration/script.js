@@ -24,6 +24,9 @@ const errors = {
   refLastName: document.getElementById("refPhysicianLastNameError"),
 };
 
+const submitBtn = form.querySelector("button[type='submit']");
+submitBtn.disabled = true;
+
 ////////////////  DATE VALIDATION       /////////////////////
 
  function validateDateField(input, errorElement, label) {
@@ -117,6 +120,32 @@ function validatePID() {
   return true;
 }
 
+/////////////////////////
+function checkFormValidity() {
+  const isFormValid =
+    validateDateField(inputs.date, errors.date, "Date") &&
+    validateDateField(inputs.dob, errors.dob, "Date of Birth") &&
+    validateName(inputs.firstName, errors.firstName) &&
+    validateName(inputs.lastName, errors.lastName) &&
+    validateName(inputs.refFirstName, errors.refFirstName) &&
+    validateName(inputs.refLastName, errors.refLastName) &&
+    validatePhone() &&
+    validatePID();
+
+  submitBtn.disabled = !isFormValid;
+}
+inputs.date.addEventListener("change", checkFormValidity);
+inputs.dob.addEventListener("change", checkFormValidity);
+
+inputs.phone.addEventListener("input", checkFormValidity);
+inputs.pid.addEventListener("input", checkFormValidity);
+
+inputs.firstName.addEventListener("input", checkFormValidity);
+inputs.lastName.addEventListener("input", checkFormValidity);
+
+inputs.refFirstName.addEventListener("input", checkFormValidity);
+inputs.refLastName.addEventListener("input", checkFormValidity);
+
 
 
 inputs.date.addEventListener("change", () =>
@@ -182,11 +211,14 @@ function createPatientObject() {
     validatePID();
 
     if (!isValid) return;
+    
+if (submitBtn.disabled) return;
 
   const patientData = createPatientObject();
   console.log(patientData); 
 
   alert("Patient registered successfully!");
   form.reset();
+  submitBtn.disabled = true;
 });
   
