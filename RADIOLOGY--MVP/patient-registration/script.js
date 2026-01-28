@@ -24,10 +24,6 @@ const errors = {
   refLastName: document.getElementById("refPhysicianLastNameError"),
 };
 
-const submitBtn = form.querySelector("button[type='submit']");
-submitBtn.disabled = true;
-
-
 ////////////////  DATE VALIDATION       /////////////////////
 
  function validateDateField(input, errorElement, label) {
@@ -120,62 +116,35 @@ function validatePID() {
   errors.pid.textContent = "";
   return true;
 }
-//////////////////////////
-function updateSubmitButtonState() {
-  const isFormValid =
-    validateDateField(inputs.date, errors.date, "Date") &&
-    validateDateField(inputs.dob, errors.dob, "Date of Birth") &&
-    validateName(inputs.firstName, errors.firstName) &&
-    validateName(inputs.lastName, errors.lastName) &&
-    validateName(inputs.refFirstName, errors.refFirstName) &&
-    validateName(inputs.refLastName, errors.refLastName) &&
-    validatePhone() &&
-    validatePID();
-
-  submitBtn.disabled = !isFormValid;
-}
 
 
 
-inputs.date.addEventListener("change", () =>{
-  validateDateField(inputs.date, errors.date, "Date");
-  updateSubmitButtonState();
-});
+inputs.date.addEventListener("change", () =>
+  validateDateField(inputs.date, errors.date, "Date")
+);
 
-inputs.dob.addEventListener("change", () =>{
-  validateDateField(inputs.dob, errors.dob, "Date of Birth");
-updateSubmitButtonState();
-});
+inputs.dob.addEventListener("change", () =>
+  validateDateField(inputs.dob, errors.dob, "Date of Birth")
+);
 
-inputs.phone.addEventListener("input", () => {
-  validatePhone();
-  updateSubmitButtonState();
-});
-inputs.pid.addEventListener("input", () => {
-  validatePID();
-  updateSubmitButtonState();
-});
+inputs.phone.addEventListener("input", validatePhone);
+inputs.pid.addEventListener("input", validatePID);
 
+inputs.firstName.addEventListener("input", () =>
+  validateName(inputs.firstName, errors.firstName)
+);
 
-inputs.firstName.addEventListener("input", () =>{
-  validateName(inputs.firstName, errors.firstName);
- updateSubmitButtonState();
-});
+inputs.lastName.addEventListener("input", () =>
+  validateName(inputs.lastName, errors.lastName)
+);
 
-inputs.lastName.addEventListener("input", () =>{
-  validateName(inputs.lastName, errors.lastName);
-   updateSubmitButtonState();
-});
+inputs.refFirstName.addEventListener("input", () =>
+  validateName(inputs.refFirstName, errors.refFirstName)
+);
 
-inputs.refFirstName.addEventListener("input", () =>{
-  validateName(inputs.refFirstName, errors.refFirstName);
-   updateSubmitButtonState();
-});
-
-inputs.refLastName.addEventListener("input", () =>{
-  validateName(inputs.refLastName, errors.refLastName);
-   updateSubmitButtonState();
-});
+inputs.refLastName.addEventListener("input", () =>
+  validateName(inputs.refLastName, errors.refLastName)
+);
 
 /////////             creating objects            //////////////
 function createPatientObject() {
@@ -213,14 +182,11 @@ function createPatientObject() {
     validatePID();
 
     if (!isValid) return;
-    if (submitBtn.disabled) return;
-
 
   const patientData = createPatientObject();
   console.log(patientData); 
 
   alert("Patient registered successfully!");
   form.reset();
-    submitBtn.disabled = true;
 });
   
