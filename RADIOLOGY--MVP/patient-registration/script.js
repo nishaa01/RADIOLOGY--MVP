@@ -117,34 +117,65 @@ function validatePID() {
   return true;
 }
 
+///////////////////////
+const submitBtn = document.getElementById("submitBtn");
+
+function checkFormValidity() {
+  const isValid =
+    validateDateField(inputs.date, errors.date, "Date") &&
+    validateDateField(inputs.dob, errors.dob, "Date of Birth") &&
+    validateName(inputs.firstName, errors.firstName) &&
+    validateName(inputs.lastName, errors.lastName) &&
+    validateName(inputs.refFirstName, errors.refFirstName) &&
+    validateName(inputs.refLastName, errors.refLastName) &&
+    validatePhone() &&
+    validatePID();
+
+  submitBtn.disabled = !isValid;
+}
 
 
-inputs.date.addEventListener("change", () =>
+
+inputs.date.addEventListener("change", () =>{
   validateDateField(inputs.date, errors.date, "Date")
-);
+checkFormValidity();
 
-inputs.dob.addEventListener("change", () =>
+});
+
+inputs.dob.addEventListener("change", () =>{
   validateDateField(inputs.dob, errors.dob, "Date of Birth")
-);
+  checkFormValidity();
+});
 
-inputs.phone.addEventListener("input", validatePhone);
-inputs.pid.addEventListener("input", validatePID);
+inputs.phone.addEventListener("input", () => {
+  validatePhone();
+  checkFormValidity();
+});
+inputs.pid.addEventListener("input", () => {
+  validatePID();
+  checkFormValidity();
+});
 
-inputs.firstName.addEventListener("input", () =>
+
+inputs.firstName.addEventListener("input", () =>{
   validateName(inputs.firstName, errors.firstName)
-);
+   checkFormValidity();
+});
 
-inputs.lastName.addEventListener("input", () =>
+inputs.lastName.addEventListener("input", () =>{
   validateName(inputs.lastName, errors.lastName)
-);
+   checkFormValidity();
+});
 
-inputs.refFirstName.addEventListener("input", () =>
+inputs.refFirstName.addEventListener("input", () =>{
   validateName(inputs.refFirstName, errors.refFirstName)
-);
+   checkFormValidity();
+});
 
-inputs.refLastName.addEventListener("input", () =>
+inputs.refLastName.addEventListener("input", () =>{
   validateName(inputs.refLastName, errors.refLastName)
-);
+   checkFormValidity();
+});
 
 /////////             creating objects            //////////////
 function createPatientObject() {
