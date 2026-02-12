@@ -1,8 +1,18 @@
+# main.py or backend/api/main.py
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from backend.api.db import patients
 
 app = FastAPI(title="Radiology MVP API")
+
+# ✅ CORS MUST come BEFORE routes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Patient(BaseModel):
     registration_date: str
@@ -14,6 +24,10 @@ class Patient(BaseModel):
     patient_id: str
     referring_physician_first_name: str
     referring_physician_last_name: str
+    
+@app.get("/")
+def root():
+    return {"status": "API is running 🏥"}
 
 @app.get("/patients")
 def get_patients():

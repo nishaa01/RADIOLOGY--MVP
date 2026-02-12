@@ -196,10 +196,26 @@ function createPatientObject() {
     }
   };
 }
+
+/////////////////////////////////////////////
+function mapToBackendPayload(frontendData) {
+  return {
+    registration_date: frontendData.date,
+    first_name: frontendData.patient.firstName,
+    last_name: frontendData.patient.lastName,
+    gender: document.getElementById("gender").value,
+    phone_number: frontendData.patient.phone,
+    date_of_birth: frontendData.patient.dob,
+    patient_id: frontendData.pid,
+    referring_physician_first_name: frontendData.physician.firstName,
+    referring_physician_last_name: frontendData.physician.lastName
+  };
+}
+
   
 ////////////////////////////////////////////////
 
-  form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const isValid =
@@ -212,12 +228,27 @@ function createPatientObject() {
     validatePhone() &&
     validatePID();
 
-    if (!isValid) return;
+  if (!isValid) return;
 
-  const patientData = createPatientObject();
-  console.log(patientData); 
+  const frontendData = createPatientObject();
+  const backendPayload = mapToBackendPayload(frontendData);
 
-  alert("Patient registered successfully!");
-  form.reset();
+  try {
+    const response = await fetch("http://127.0.0.1:8000/patients", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(backendPayload)
+    });
+
+    const data = await response.json();
+    alert(data.message || "Patient registered successfully ✅");
+
+    form.reset();
+    submitBtn.disabled = true;
+  } catch (err) {
+    console.error(err);
+    alert("Backend error ❌");
+  }
 });
+
   
