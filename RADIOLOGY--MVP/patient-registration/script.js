@@ -1,4 +1,3 @@
-console.log("Script loaded!"); // 
 
 // Get all inputs
 const inputs = {
@@ -110,12 +109,12 @@ if (inputs.refLastName) inputs.refLastName.addEventListener("input", checkFormVa
 
 // FORM SUBMIT - using querySelector instead of getElementById
 const form = document.querySelector('form');
-console.log("Form element:", form); // ✅ Check if form is found
+console.log("Form element:", form); 
 
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log("🚀 FORM SUBMITTED!"); // ✅ You MUST see this
+    console.log("🚀 FORM SUBMITTED!"); 
 
     // Create payload
     const payload = {
@@ -144,17 +143,17 @@ if (form) {
       const data = await response.json();
       console.log("📥 Response data:", data);
 
-      alert(data.message || "Patient registered! ✅");
+      alert(data.message || "Patient registered! ");
       form.reset();
       if (submitBtn) submitBtn.disabled = true;
 
     } catch (err) {
-      console.error("❌ Error:", err);
+      console.error(" Error:", err);
       alert("Error: " + err.message);
     }
   });
 } else {
-  console.error("❌ FORM NOT FOUND!");
+  console.error(" FORM NOT FOUND!");
 }
 // TEST FUNCTION - bypasses validation
 function testSubmit() {
@@ -181,11 +180,11 @@ function testSubmit() {
   })
   .then(res => res.json())
   .then(data => {
-    console.log("✅ Success:", data);
+    console.log(" Success:", data);
     alert(data.message);
   })
   .catch(err => {
-    console.error("❌ Error:", err);
+    console.error(" Error:", err);
     alert("Error: " + err.message);
   });
 }

@@ -6,7 +6,7 @@ from backend.api.db import patients
 
 app = FastAPI(title="Radiology MVP API")
 
-# ✅ CORS MUST come BEFORE routes
+#  CORS MUST come BEFORE routes
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -27,7 +27,7 @@ class Patient(BaseModel):
     
 @app.get("/")
 def root():
-    return {"status": "API is running 🏥"}
+    return {"status": "API is running "}
 
 @app.get("/patients")
 def get_patients():
@@ -39,6 +39,6 @@ def add_patient(patient: Patient):
     new_patient["id"] = len(patients) + 1
     patients.append(new_patient)
     return {
-        "message": "Patient registered successfully ✅",
+        "message": "Patient registered successfully ",
         "patient": new_patient
     }
